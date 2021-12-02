@@ -1,0 +1,31 @@
+#!/bin/bash
+
+jamfbinary=$(/usr/bin/which jamf)
+
+echo "Installing Rosetta"
+/usr/sbin/softwareupdate --install-rosetta --agree-to-license
+
+${jamfbinary} recon
+
+echo "Installing NoMADLoginAD"
+${jamfbinary} policy -event "installNoLoMAD"
+
+sleep 15
+
+while true
+do
+loggedinuser=$(/bin/ls -l /dev/console | /usr/bin/awk '{ print $3 }')
+
+echo $loggedinuser
+
+    if [ "${loggedinuser}" == "root" ] || [ "${loggedinuser}" == "_mbsetupuser" ]; then
+    echo "is root or mbsetupuser"
+    sleep 10
+    else
+    echo "is local user"
+    break
+    fi
+done
+
+echo "Installing depNotify"
+${jamfbinary} policy -event "installdepNotify"
