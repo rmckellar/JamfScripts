@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Remove any pre-exisiting Preference file
+rm -Rf /Library/Preferences/menu.nomad.login.ad.plist
+
+# Write plist
+defaults write /Library/Preferences/menu.nomad.login.ad.plist BackgroundImage "/System/Library/Desktop\ Pictures/Big\ Sur.heic"
+defaults write /Library/Preferences/menu.nomad.login.ad.plist BackgroundImageAlpha -int "3"
+defaults write /Library/Preferences/menu.nomad.login.ad.plist LoginLogo "/Users/Shared/.LoginLogo.png"
+defaults write /Library/Preferences/menu.nomad.login.ad.plist LoginLogoAlpha -int "10"
+defaults write /Library/Preferences/menu.nomad.login.ad.plist KeychainAddNoMAD -bool "true"
+defaults write /Library/Preferences/menu.nomad.login.ad.plist KeychainCreate -bool "true"
+defaults write /Library/Preferences/menu.nomad.login.ad.plist LoginScreen -bool "true"
+defaults write /Library/Preferences/menu.nomad.login.ad.plist LocalFallback -bool "true"
+defaults write /Library/Preferences/menu.nomad.login.ad.plist Migrate -bool "true"
+defaults write /Library/Preferences/menu.nomad.login.ad.plist RecursiveGroupLookup -bool "true"
+defaults write /Library/Preferences/menu.nomad.login.ad.plist LDAPServers -array-add "10.48.5.5"
+
+exit 0      ## Success
+exit 1      ## Failure
