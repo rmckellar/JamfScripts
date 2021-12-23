@@ -1,12 +1,24 @@
 #!/bin/bash
 
 jamfbinary=$(/usr/bin/which jamf)
+arch=$(/usr/bin/arch)
 
-echo "Installing Rosetta"
-/usr/sbin/softwareupdate --install-rosetta --agree-to-license
+##########################################
+echo "Installing Rosetta, if applicable"
 
+if [ "$arch" == "arm64" ]; then
+    echo "Apple Silicon - Installing Rosetta"
+    /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+elif [ "$arch" == "i386" ]; then
+    echo "Intel - Skipping Rosetta"
+else
+    echo "Unknown Architecture"
+fi
+##########################################
+echo "Reporting back to Jamf"
 ${jamfbinary} recon
 
+##########################################
 echo "Installing NoMADLoginAD"
 ${jamfbinary} policy -event "installNoLoMAD"
 
@@ -27,5 +39,6 @@ echo $loggedinuser
     fi
 done
 
-echo "Installing depNotify"
+##########################################
+echo "Installing depNotify and launching"
 ${jamfbinary} policy -event "installdepNotify"
