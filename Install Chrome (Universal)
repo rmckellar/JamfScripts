@@ -2,10 +2,6 @@
 
 # Changed the installer from .dmg to .pkg and took out the bit for choosing an architecture.
 
-# clear old User Application Support Google folder
-loggedInUser=$( scutil <<< "show State:/Users/ConsoleUser" | awk '/Name :/ && ! /loginwindow/ { print $3 }' )
-rm -rf "/Users/$loggedInUser/Library/Application Support/Google"
-
 # make temp folder for downloads
 mkdir "/tmp/googlechrome"
 
