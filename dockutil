@@ -1,0 +1,36 @@
+#!/bin/sh
+
+LoggedInUser=`ls -l /dev/console | awk '/ / { print $3 }'`
+LoggedInUserHome="/Users/$LoggedInUser"
+
+configureDefaultDock() {
+
+echo "Logged in user is $LoggedInUser"
+echo "Logged in user's home $LoggedInUserHome"
+
+if [ -e /usr/local/bin/dockutil ];
+then
+   dockutilVersion=`/usr/local/bin/dockutil --version --version`; echo "dockutil version: $dockutilVersion"
+
+echo "Clearing Dock..."; /usr/local/bin/dockutil --remove all --no-restart "$LoggedInUserHome"
+
+echo "Adding Calendar..."; /usr/local/bin/dockutil --add '/Applications/Calendar.app' --no-restart  --position 1 "$LoggedInUserHome"
+echo "Adding TextEdit..."; /usr/local/bin/dockutil --add '/Applications/TextEdit.app' --no-restart --position 2 "$LoggedInUserHome"
+echo "Adding Google Chrome..."; /usr/local/bin/dockutil --add '/Applications/Google Chrome.app' --no-restart --position 3 "$LoggedInUserHome"
+echo "Adding GarageBand..."; /usr/local/bin/dockutil --add '/Applications/GarageBand.app' --no-restart --position 4 "$LoggedInUserHome"
+echo "Adding GarageBand..."; /usr/local/bin/dockutil --add '/Applications/Sibelius 7.5.app' --no-restart --position 5 "$LoggedInUserHome"
+echo "Adding Applications..."; /usr/local/bin/dockutil --add '~/Applications' --no-restart --position 6 "$LoggedInUserHome"
+echo "Adding Downloads..."; /usr/local/bin/dockutil --add '~/Downloads' --no-restart --position 7 "$LoggedInUserHome"
+
+touch $LoggedInUserHome/Library/Preferences/com.company.docksetup.plist
+
+else
+   echo "dockutil not installed, skipping initial dock setup..."
+fi
+
+}
+
+configureDefaultDock
+killall -KILL Dock
+
+exit 0
