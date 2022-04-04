@@ -25,7 +25,7 @@ echo "Adding Downloads..."; /usr/local/bin/dockutil --add 'Microsoft Excel' --no
 echo "Adding Downloads..."; /usr/local/bin/dockutil --add 'Microsoft PowerPoint' --no-restart --position 9 "$LoggedInUserHome"
 echo "Adding Downloads..."; /usr/local/bin/dockutil --add 'Microsoft OneNote' --no-restart --position 10 "$LoggedInUserHome"
 echo "Adding Downloads..."; /usr/local/bin/dockutil --add 'CMU Self Service' --no-restart --position 11 "$LoggedInUserHome"
-echo "Adding Downloads..."; /usr/local/bin/dockutil --add 'Representative Console - helpdesk.remotesupport.cmich.edu' --no-restart --position 11 "$LoggedInUserHome"
+echo "Adding Downloads..."; /usr/local/bin/dockutil --add 'Representative Console - helpdesk.remotesupport.cmich.edu' --no-restart --position 12 "$LoggedInUserHome"
 
 touch $LoggedInUserHome/Library/Preferences/com.company.docksetup.plist
 
