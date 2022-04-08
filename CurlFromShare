@@ -1,0 +1,6 @@
+#!/bin/bash
+
+name=$(who | awk '/console/{print $1}')
+pass=$(security find-generic-password -a $name -w /Users/$name/Library/Keychains/login.keychain)
+
+curl -u "${adpath}${name}:${pass}" smb://server.example.com/sharename/file -p /path/to/somewhere/file
